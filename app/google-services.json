@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "234664656893",
+    "firebase_url": "https://geeksgibi.firebaseio.com",
+    "project_id": "geeksgibi",
+    "storage_bucket": "geeksgibi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234664656893:android:157eeb27f4a31142",
+        "android_client_info": {
+          "package_name": "com.example.fulanoeciclano.geek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234664656893-jqfd7ittdkodi17odntdibguc7lu47qf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fulanoeciclano.geek",
+            "certificate_hash": "47830f9f4e8b621667ed6ac25a3cf965dbee377b"
+          }
+        },
+        {
+          "client_id": "234664656893-boompl9phu6rv8r2k4f2q752a40a5mq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh8855-QHUOpuVweNVGQffq53jtrQxkpw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234664656893-boompl9phu6rv8r2k4f2q752a40a5mq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

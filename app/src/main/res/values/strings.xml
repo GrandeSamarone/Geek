@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Geek</string>
+    <string name="title_activity_cadastrar_icon_nome_">Cadastrar_icon_nome_Activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_descricao_gibi">DescricaoGibiActivity</string>
+
+
+</resources>

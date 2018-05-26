@@ -10,11 +10,14 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.example.fulanoeciclano.geek.Adapter.IconeAdapter;
 import com.example.fulanoeciclano.geek.Config.ConfiguracaoFirebase;
 import com.example.fulanoeciclano.geek.Model.Icones;
 import com.example.fulanoeciclano.geek.R;
+import com.example.fulanoeciclano.geek.helper.RecyclerItemClickListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +34,7 @@ public class PageIcon extends AppCompatActivity {
     private ArrayList<Icones> Listicones = new ArrayList<>();
     private IconeAdapter adapterIcone;
     private ValueEventListener valueEventListenerIcone;
+    public static final int SELECAO_ICONE = 34;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,28 @@ public class PageIcon extends AppCompatActivity {
         recyclerViewIcone.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerViewIcone.setHasFixedSize(true);
         recyclerViewIcone.setAdapter(adapterIcone);
+
+        recyclerViewIcone.addOnItemTouchListener(new RecyclerItemClickListener(
+                this, recyclerViewIcone, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(PageIcon.this, Cadastrar_icon_nome_Activity.class);
+                intent.putExtra("caminho_foto",Listicones.get(position).getUrl());
+             startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        }));
+
+
 
 
     }

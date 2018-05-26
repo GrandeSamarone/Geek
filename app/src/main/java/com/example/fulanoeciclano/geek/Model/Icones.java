@@ -1,19 +1,21 @@
 package com.example.fulanoeciclano.geek.Model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by fulanoeciclano on 20/05/2018.
  */
 
-public class Icones {
+public class Icones implements Serializable {
     private String id = UUID.randomUUID().toString();
     private String name;
     private String url;
 
-    public Icones(){
 
-    }
+
+
+
     public String getId() {
         return id;
     }

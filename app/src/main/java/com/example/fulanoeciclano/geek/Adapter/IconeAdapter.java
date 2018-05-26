@@ -1,7 +1,6 @@
 package com.example.fulanoeciclano.geek.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fulanoeciclano.geek.Activitys.Cadastrar_icon_nome_Activity;
 import com.example.fulanoeciclano.geek.Model.Icones;
 import com.example.fulanoeciclano.geek.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -27,6 +25,7 @@ public class IconeAdapter   extends RecyclerView.Adapter<IconeAdapter.MyViewHold
     View v;
     Context c;
     List<Icones> icones;
+    public static final int SELECAO_ICONE = 34;
 
     public  IconeAdapter(Context context,  List<Icones> Listicones) {
         this.c = context;
@@ -45,7 +44,9 @@ public class IconeAdapter   extends RecyclerView.Adapter<IconeAdapter.MyViewHold
 
         holder.carmodelo.setRadius(0);
         holder.carmodelo.setCardElevation(0);
-        Icones icone  = icones.get(position);
+        final Icones icone  = icones.get(position);
+
+
 
 
         if(icone.getUrl() !=null){
@@ -68,17 +69,18 @@ public class IconeAdapter   extends RecyclerView.Adapter<IconeAdapter.MyViewHold
 
 
 
-        holder.carmodelo.setOnClickListener(new View.OnClickListener() {
+        /*holder.carmodelo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position!=0){
+
                     Intent intent=new Intent(c, Cadastrar_icon_nome_Activity.class);
                     intent.putExtra("caminho_foto",icones.get(position).getUrl());
                     c.startActivity(intent);
-                }
+                Toast.makeText(c, "Carregando...", Toast.LENGTH_LONG).show();
+
             }
         });
-
+*/
 
     }
 

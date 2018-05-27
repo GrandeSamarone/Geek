@@ -48,10 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:hint="Nome do Usuario" />
-
-
-
-
     </LinearLayout>
 
     <TextView

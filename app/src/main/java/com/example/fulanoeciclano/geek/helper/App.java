@@ -4,6 +4,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.example.fulanoeciclano.geek.Config.ConfiguracaoFirebase;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -17,5 +18,6 @@ public class App extends MultiDexApplication {
         super.onCreate();
         data = ConfiguracaoFirebase.getDatabase();
         MultiDex.install(this);
+        AppEventsLogger.activateApp(this);
     }
 }

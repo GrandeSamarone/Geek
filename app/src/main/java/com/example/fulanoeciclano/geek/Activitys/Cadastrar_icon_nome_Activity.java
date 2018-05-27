@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.fulanoeciclano.geek.Config.ConfiguracaoFirebase;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -45,7 +47,10 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference database;
     private String identificadorUsuario;
+    private FirebaseAuth autenticacao;
     private Usuario usuarioLogado;
+    private EditText NomeUsuario;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
         identificadorUsuario = UsuarioFirebase.getIdentificadorUsuario();
         usuarioLogado=UsuarioFirebase.getDadosUsuarioLogado();
 
+        NomeUsuario = findViewById(R.id.editPerfilNome);
         //ao clicar na iimagem abre dialig para escolher entre icone ou galeria
         imageNick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,10 +140,12 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
 
    //Cadastrando Icone
     private void CadastrarIcone() {
+
+
     imageNick.setDrawingCacheEnabled(true);
     imageNick.buildDrawingCache();
 
-    Bitmap bitmap = imageNick.getDrawingCache();
+    final Bitmap bitmap = imageNick.getDrawingCache();
      if(bitmap!=null){
          //Recuperar dados da imagem  para o  Firebase
          ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -171,6 +179,9 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
                  Toast.makeText(Cadastrar_icon_nome_Activity.this, "Imagem Carregada com Sucesso", Toast.LENGTH_SHORT).show();
 
                  Uri url= taskSnapshot.getDownloadUrl();
+                //Inserindo no banco de dados
+                 InserirUsuario(url);
+
 
 
              }
@@ -187,7 +198,26 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
     }
 
 
+private void InserirUsuario(Uri url) {
+    autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
+    String nome =NomeUsuario.getText().toString();
+
+    if (!nome.isEmpty()) {
+        usuario = new Usuario();
+        usuario.setNome(nome);
+        usuario.setFoto(String.valueOf(url));
+        usuario.setTipoUsuario("usuario");
+        //   String  identificadorUsuario = Base64Custom.codificarBase64(usuario.getNome());
+        usuario.setId(identificadorUsuario);
+        usuario.salvar();
+        Intent it = new Intent(Cadastrar_icon_nome_Activity.this,MainActivity.class);
+        startActivity(it);
+        finish();
+    }else{
+        Toast.makeText(this, "Coloque o nome", Toast.LENGTH_SHORT).show();
+    }
+}
 
 
 
@@ -242,7 +272,9 @@ public class Cadastrar_icon_nome_Activity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(Cadastrar_icon_nome_Activity.this, "Imagem Carregada com Sucesso", Toast.LENGTH_SHORT).show();
-
+                            Uri url= taskSnapshot.getDownloadUrl();
+                            //Inserindo no banco de dados
+                            InserirUsuario(url);
 
                         }
                     }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

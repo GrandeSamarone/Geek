@@ -1,32 +1,22 @@
 package com.example.fulanoeciclano.geek.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fulanoeciclano.geek.Activitys.PostDetailActivity;
 import com.example.fulanoeciclano.geek.Model.Post;
 import com.example.fulanoeciclano.geek.R;
 import com.example.fulanoeciclano.geek.Viewholder.PostViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 
 
-public abstract class TopicosFragment extends Fragment {
+public  class TopicosFragment extends Fragment {
 
     //retirar Abstract depois
     private static final String TAG = "PostListFragment";
@@ -36,6 +26,7 @@ public abstract class TopicosFragment extends Fragment {
     private FirebaseRecyclerAdapter<Post, PostViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
+
     public TopicosFragment(){
 
     }
@@ -53,7 +44,7 @@ public abstract class TopicosFragment extends Fragment {
         return view;
     }
 
-    @Override
+   /* @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -177,5 +168,5 @@ public abstract class TopicosFragment extends Fragment {
     }
 
     public abstract Query getQuery(DatabaseReference databaseReference);
-
+*/
 }

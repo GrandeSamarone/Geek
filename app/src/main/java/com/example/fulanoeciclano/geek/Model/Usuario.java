@@ -18,6 +18,7 @@ public class Usuario implements Serializable {
     private String id;
     private String nome;
     private String foto;
+    private String TipoUsuario;
 
     public Usuario() {
     }
@@ -42,6 +43,7 @@ public class Usuario implements Serializable {
         HashMap<String,Object> usuarioMap = new HashMap<>();
         usuarioMap.put("nome",getNome());
         usuarioMap.put("foto",getFoto());
+        usuarioMap.put("TipoUsuario",getTipoUsuario());
 
         return usuarioMap;
     }
@@ -67,5 +69,13 @@ public class Usuario implements Serializable {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getTipoUsuario() {
+        return TipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        TipoUsuario = tipoUsuario;
     }
 }

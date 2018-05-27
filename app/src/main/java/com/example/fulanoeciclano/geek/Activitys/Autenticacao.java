@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.example.fulanoeciclano.geek.R;
+import com.example.fulanoeciclano.geek.Model.Usuario;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ui.phone.CountryListSpinner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,19 +29,25 @@ public class Autenticacao extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private Toolbar toolbar;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private CountryListSpinner mCountryListSpinner;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseStorage mFirebaseStorage;
     private String mUsername;
+    private Usuario usuario;
+
+
     private Intent cadastrocomSucesso;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //inicia o banco do firebase
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseStorage = FirebaseStorage.getInstance();
-
+      Log.i("ss", String.valueOf(mCountryListSpinner));
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -54,17 +62,23 @@ public class Autenticacao extends AppCompatActivity {
                 } else {
 
 
-
-                    List<AuthUI.IdpConfig> providers = Collections.singletonList(
-                            //new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                    List<AuthUI.IdpConfig> providers = Arrays.asList(
+                   // List<AuthUI.IdpConfig> providers = Collections.singletonList(
+                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                            new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                          //  new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
                             new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()
+
                     );
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(providers)
-                                    .setTheme(R.style.AppTheme)
+
+
+                                    //.setTheme(R.style.AppTheme)
+
                                     .build(),
                             RC_SIGN_IN);
 
@@ -75,6 +89,8 @@ public class Autenticacao extends AppCompatActivity {
         };
 
     }
+
+
 
     private void onSignedInInitialize(String username) {
         mUsername = username;
@@ -107,6 +123,17 @@ public class Autenticacao extends AppCompatActivity {
     }
 
 
+    protected void onStart(){
+        super.onStart();
+        //recupera usuario atual
+        FirebaseUser usuarioAtual= mFirebaseAuth.getCurrentUser();
+        if(usuarioAtual!=null ){
+            Intent it = new Intent(Autenticacao.this,MainActivity.class);
+            startActivity(it);
+            //recuperando o email
+            Log.i("tst",usuarioAtual.getPhoneNumber());
+        }
+    }
     protected void onPause() {
         super.onPause();
         if(mAuthStateListener!=null) {
@@ -115,5 +142,6 @@ public class Autenticacao extends AppCompatActivity {
         //  detachDatabaseReadListener();
         // mMessageAdapter.clear();
     }
+
 
 }

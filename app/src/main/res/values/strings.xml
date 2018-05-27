@@ -1,10 +1,15 @@
-<resources>
-    <string name="app_name">Geek</string>
+<resources >
+    <string name="app_name">Comic Collection</string>
     <string name="title_activity_cadastrar_icon_nome_">Cadastrar_icon_nome_Activity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_descricao_gibi">DescricaoGibiActivity</string>
+    <string name="facebook_app_id">187928898608771</string>
+    <string name="facebook_application_id" translatable="false">187928898608771</string>
+    <!-- Facebook Application ID, prefixed by 'fb'. Enables Chrome Custom tabs. -->
+    <string name="facebook_login_protocol_scheme" translatable="false">468d112bcbf329907ddd56a628b27342</string>
+    <string name="fb_login_protocol_scheme">468d112bcbf329907ddd56a628b27342</string>
 
 
 </resources>
